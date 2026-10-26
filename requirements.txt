@@ -1,0 +1,7 @@
+# Python packages for the chassis pipeline, optimizer and tests (Python 3.11 used here).
+#   python -m pip install -r requirements.txt
+# Versions on the original PC, Oct 2026: numpy 2.4.6, scipy 1.17.1, pillow 12.3.0, openpyxl 3.1.5.
+numpy
+scipy>=1.9    # scipy.optimize.milp in layout_engine.py
+pillow        # checkpoint images in chassis_pipeline.py
+openpyxl      # VR3 Excel BOM in vr3_bom.py

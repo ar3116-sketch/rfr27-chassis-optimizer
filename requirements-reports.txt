@@ -1,0 +1,6 @@
+# Extra packages for the report figures and PDF checks (reports/latex, reports/explainer/build).
+#   python -m pip install -r requirements-reports.txt
+-r requirements.txt
+matplotlib
+pymupdf
+# The old research-report builder in handoff/research-source/ also needs pypdf, python-pptx and reportlab.

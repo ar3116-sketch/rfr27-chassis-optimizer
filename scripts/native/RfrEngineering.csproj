@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net8.0-windows</TargetFramework><ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable><PlatformTarget>x64</PlatformTarget></PropertyGroup>
+  <!-- SOLIDWORKS install folder. Override with -p:SolidWorksDir=... or a SolidWorksDir environment variable. -->
+  <PropertyGroup>
+    <SolidWorksDir Condition="'$(SolidWorksDir)'==''">C:\Program Files\SOLIDWORKS Corp\SOLIDWORKS</SolidWorksDir>
+    <SolidWorksRedist>$([MSBuild]::EnsureTrailingSlash('$(SolidWorksDir)'))api\redist\</SolidWorksRedist>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="SolidWorks.Interop.sldworks"><HintPath>$(SolidWorksRedist)SolidWorks.Interop.sldworks.dll</HintPath><EmbedInteropTypes>false</EmbedInteropTypes></Reference>
+    <Reference Include="SolidWorks.Interop.swconst"><HintPath>$(SolidWorksRedist)SolidWorks.Interop.swconst.dll</HintPath><EmbedInteropTypes>false</EmbedInteropTypes></Reference>
+    <Reference Include="SolidWorks.Interop.cosworks"><HintPath>$(SolidWorksRedist)SolidWorks.Interop.cosworks.dll</HintPath><EmbedInteropTypes>false</EmbedInteropTypes></Reference>
+  </ItemGroup>
+  <Target Name="CheckSolidWorksDir" BeforeTargets="ResolveAssemblyReferences" Condition="!Exists('$(SolidWorksRedist)SolidWorks.Interop.sldworks.dll')">
+    <Error Text="SOLIDWORKS interop DLLs not found in $(SolidWorksRedist). Set SolidWorksDir (-p:SolidWorksDir=... or an environment variable) to the SOLIDWORKS install folder." />
+  </Target>
+</Project>
